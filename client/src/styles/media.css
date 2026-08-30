@@ -1,0 +1,445 @@
+/* ============================================================ */
+/* media.css — responsive breakpoints
+/* ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 760px) {
+  section {
+    padding: 64px 0;
+  }
+  .section-head {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .navbar-toggle {
+    display: flex;
+  }
+  .navbar-cta {
+    display: none;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(244, 247, 255, 0.4) 50%,
+      rgba(219, 230, 255, 0.42) 100%
+    );
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 8px 24px 24px;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 18px;
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.8),
+      inset 0 -10px 18px -14px rgba(47, 94, 255, 0.22),
+      0 20px 40px -18px rgba(10, 26, 58, 0.3);
+  }
+
+  @supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
+    .navbar-links {
+      backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
+      -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
+    }
+  }
+
+  .navbar-links.is-open {
+    display: flex;
+  }
+
+  .nav-indicator {
+    display: none;
+  }
+
+  .navbar-links a:not(.navbar-links-cta-mobile) {
+    width: 100%;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+  }
+
+  .navbar-links a.active {
+    color: var(--blue);
+  }
+
+  .navbar-links-cta-mobile {
+    display: inline-flex;
+    width: 100%;
+    margin-top: 16px;
+    border-radius: 40px;
+  }
+
+  .navbar-dropdown-menu {
+    position: static;
+    left: auto;
+    margin-left: 0;
+    transform: none;
+    min-width: 0;
+    width: 100%;
+    animation: none;
+  }
+
+  .navbar-dropdown-menu-inner {
+    background: rgba(244, 247, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    box-shadow: 0 20px 40px -18px rgba(10, 26, 58, 0.22);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .navbar-dropdown-menu-inner::before {
+    display: none;
+  }
+
+  .navbar-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+  }
+
+  /* Touch press ("hold") equivalent of the desktop liquid-glass hover.
+     :hover doesn't fire reliably on touch, so :active carries the
+     glass highlight while a finger is down.
+
+     Previously this used an animated rainbow conic-gradient rim
+     (white/blue/pink hue-rotate) on a ::before pseudo-element — that
+     read as an unintended pink/rainbow tint rather than glass. Now
+     it's the same neutral, low-opacity frosted treatment used for
+     desktop hover: a plain background tint + blur/saturate + a
+     single neutral hairline border. No ::before, no keyframe
+     animation needed. */
+  .navbar-links a:active:not(.navbar-links-cta-mobile),
+  .navbar-dropdown-trigger:active {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px) saturate(115%) brightness(1.03);
+    -webkit-backdrop-filter: blur(14px) saturate(115%) brightness(1.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      inset 0 -6px 10px -6px rgba(20, 20, 30, 0.08),
+      0 6px 16px -10px rgba(10, 26, 58, 0.3);
+  }
+
+  @supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
+    .navbar-links a:active:not(.navbar-links-cta-mobile),
+    .navbar-dropdown-trigger:active {
+      backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
+      -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .hero-inner {
+    padding: 130px clamp(16px, 5vw, 40px) 60px;
+  }
+  .hero-stats {
+    flex-direction: column;
+    margin-top: 32px;
+  }
+  .hero-stat {
+    padding-right: 0;
+    padding-bottom: 16px;
+  }
+  .hero-stat-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1000px) {
+  .course-offered-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .course-offered-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .career-guidance-top {
+    grid-template-columns: 1fr;
+  }
+  .career-guidance-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .career-guidance-grid {
+    grid-template-columns: 1fr;
+  }
+  .career-guidance-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cg-panel-row {
+    flex-direction: column;
+  }
+  .cg-panel-box {
+    width: 100%;
+  }
+  .cg-panel-ring {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 960px) {
+  .em-top {
+    grid-template-columns: 1fr;
+  }
+  .em-visual {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .em-grid {
+    grid-template-columns: 1fr;
+  }
+  .em-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1000px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+  .faq-footer-note {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 700px) {
+  .course-row {
+    grid-template-columns: 1fr;
+  }
+  .course-row-side {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .course-detail-inner {
+    grid-template-columns: 1fr;
+  }
+  .course-detail-side {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-registration dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .form-page-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .program-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .benefit-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .program-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .roadmap-phase,
+  .roadmap-phase--reverse {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+  .roadmap-phase-copy,
+  .roadmap-phase--reverse .roadmap-phase-copy {
+    max-width: none;
+    justify-self: stretch;
+    order: 2;
+  }
+  .roadmap-phase-visual,
+  .roadmap-phase--reverse .roadmap-phase-visual {
+    justify-self: center;
+    order: 1;
+  }
+  .roadmap-phase-visual {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+  }
+  .roadmap-phase-number {
+    font-size: 5.5rem;
+  }
+  .roadmap-list {
+    gap: 72px;
+  }
+}
+
+
+
+@media (max-width: 760px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-registration dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+ 
+@media (max-width: 700px) {
+  .course-row {
+    grid-template-columns: 1fr;
+  }
+  .course-row-side {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 18px;
+  }
+}
+ 
+@media (max-width: 760px) {
+  .course-detail-inner {
+    grid-template-columns: 1fr;
+  }
+  .course-detail-side {
+    position: static;
+  }
+}
+ 
+@media (max-width: 800px) {
+  .form-page-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .curriculum-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+ 
+  .curriculum-sidebar {
+    position: static;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+ 
+  .curriculum-sidebar-list {
+    flex-direction: row;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+ 
+  .curriculum-sidebar-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: auto;
+    flex-shrink: 0;
+    border-left: none;
+    border-bottom: 2px solid var(--line);
+    padding: 10px 14px;
+    white-space: nowrap;
+  }
+ 
+  .curriculum-sidebar-item.active {
+    border-left: none;
+    border-bottom-color: var(--blue);
+  }
+ 
+  .curriculum-sidebar-count {
+    display: none;
+  }
+}
+ 
+@media (max-width: 560px) {
+  .curriculum-card {
+    padding: 24px 20px;
+  }
+}
+ 
