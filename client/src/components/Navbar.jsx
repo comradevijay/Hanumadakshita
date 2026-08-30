@@ -21,75 +21,75 @@ const courseLinks = [
  * progressive enhancement (chiefly for Safari/WebKit) layered on top of
  * a plain blur+saturate fallback that carries the glass look on Chrome.
  */
-function LiquidGlassFilter() {
-  return (
-    <svg
-      width="0"
-      height="0"
-      style={{ position: "absolute", overflow: "hidden" }}
-      aria-hidden="true"
-      focusable="false"
-    >
-      <defs>
-        <filter
-          id="liquid-glass-distortion"
-          colorInterpolationFilters="sRGB"
-          x="0%"
-          y="0%"
-          width="100%"
-          height="100%"
-        >
+// function LiquidGlassFilter() {
+//   return (
+//     <svg
+//       width="0"
+//       height="0"
+//       style={{ position: "absolute", overflow: "hidden" }}
+//       aria-hidden="true"
+//       focusable="false"
+//     >
+//       <defs>
+//         <filter
+//           id="liquid-glass-distortion"
+//           colorInterpolationFilters="sRGB"
+//           x="0%"
+//           y="0%"
+//           width="100%"
+//           height="100%"
+//         >
           
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="map"
-            result="dispRed"
-            scale="-20"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-          <feColorMatrix
-            in="dispRed"
-            type="matrix"
-            values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
-            result="red"
-          />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="map"
-            result="dispGreen"
-            scale="-24"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-          <feColorMatrix
-            in="dispGreen"
-            type="matrix"
-            values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
-            result="green"
-          />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="map"
-            result="dispBlue"
-            scale="-28"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-          <feColorMatrix
-            in="dispBlue"
-            type="matrix"
-            values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
-            result="blue"
-          />
-          <feBlend in="red" in2="green" mode="screen" result="rg" />
-          <feBlend in="rg" in2="blue" mode="screen" result="output" />
-          <feGaussianBlur in="output" stdDeviation="3" />
-        </filter>
-      </defs>
-    </svg>
-  );
-}
+//           <feDisplacementMap
+//             in="SourceGraphic"
+//             in2="map"
+//             result="dispRed"
+//             scale="-20"
+//             xChannelSelector="R"
+//             yChannelSelector="G"
+//           />
+//           <feColorMatrix
+//             in="dispRed"
+//             type="matrix"
+//             values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
+//             result="red"
+//           />
+//           <feDisplacementMap
+//             in="SourceGraphic"
+//             in2="map"
+//             result="dispGreen"
+//             scale="-24"
+//             xChannelSelector="R"
+//             yChannelSelector="G"
+//           />
+//           <feColorMatrix
+//             in="dispGreen"
+//             type="matrix"
+//             values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
+//             result="green"
+//           />
+//           <feDisplacementMap
+//             in="SourceGraphic"
+//             in2="map"
+//             result="dispBlue"
+//             scale="-28"
+//             xChannelSelector="R"
+//             yChannelSelector="G"
+//           />
+//           <feColorMatrix
+//             in="dispBlue"
+//             type="matrix"
+//             values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
+//             result="blue"
+//           />
+//           <feBlend in="red" in2="green" mode="screen" result="rg" />
+//           <feBlend in="rg" in2="blue" mode="screen" result="output" />
+//           <feGaussianBlur in="output" stdDeviation="3" />
+//         </filter>
+//       </defs>
+//     </svg>
+//   );
+// }
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -145,7 +145,7 @@ export default function Navbar() {
 
   return (
     <>
-      <LiquidGlassFilter />
+      {/* <LiquidGlassFilter /> */}
       <header className="navbar">
         <div className="container navbar-inner">
           <NavLink to="/" className="navbar-brand" onClick={() => setOpen(false)}>
