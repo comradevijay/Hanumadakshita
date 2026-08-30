@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import ProgramBenefits from "../components/ProgramBenefits";
-import CourseRoadmap from "../components/Courseroadmap";
+import ProgramBenefits from "../components/Programbenefits";
+import CourseRoadmap from "../components/CourseRoadmap";
 import CourseCurriculum from "../components/CourseCurriculum";
 import { api } from "../api/client";
 
