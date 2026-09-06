@@ -56,11 +56,9 @@
       0 20px 40px -18px rgba(10, 26, 58, 0.3);
   }
 
-  @supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
-    .navbar-links {
-      backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
-      -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
-    }
+  html[data-liquid-glass="true"] .navbar-links {
+    backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
+    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
   }
 
   .navbar-links.is-open {
@@ -150,12 +148,10 @@
       0 6px 16px -10px rgba(10, 26, 58, 0.3);
   }
 
-  @supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
-    .navbar-links a:active:not(.navbar-links-cta-mobile),
-    .navbar-dropdown-trigger:active {
-      backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
-      -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
-    }
+  html[data-liquid-glass="true"] .navbar-links a:active:not(.navbar-links-cta-mobile),
+  html[data-liquid-glass="true"] .navbar-dropdown-trigger:active {
+    backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
+    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
   }
 }
 

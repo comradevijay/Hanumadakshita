@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useCallback } from "react";
+import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import "../styles/styles.css";
 
@@ -21,75 +21,94 @@ const courseLinks = [
  * progressive enhancement (chiefly for Safari/WebKit) layered on top of
  * a plain blur+saturate fallback that carries the glass look on Chrome.
  */
-// function LiquidGlassFilter() {
-//   return (
-//     <svg
-//       width="0"
-//       height="0"
-//       style={{ position: "absolute", overflow: "hidden" }}
-//       aria-hidden="true"
-//       focusable="false"
-//     >
-//       <defs>
-//         <filter
-//           id="liquid-glass-distortion"
-//           colorInterpolationFilters="sRGB"
-//           x="0%"
-//           y="0%"
-//           width="100%"
-//           height="100%"
-//         >
-          
-//           <feDisplacementMap
-//             in="SourceGraphic"
-//             in2="map"
-//             result="dispRed"
-//             scale="-20"
-//             xChannelSelector="R"
-//             yChannelSelector="G"
-//           />
-//           <feColorMatrix
-//             in="dispRed"
-//             type="matrix"
-//             values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
-//             result="red"
-//           />
-//           <feDisplacementMap
-//             in="SourceGraphic"
-//             in2="map"
-//             result="dispGreen"
-//             scale="-24"
-//             xChannelSelector="R"
-//             yChannelSelector="G"
-//           />
-//           <feColorMatrix
-//             in="dispGreen"
-//             type="matrix"
-//             values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
-//             result="green"
-//           />
-//           <feDisplacementMap
-//             in="SourceGraphic"
-//             in2="map"
-//             result="dispBlue"
-//             scale="-28"
-//             xChannelSelector="R"
-//             yChannelSelector="G"
-//           />
-//           <feColorMatrix
-//             in="dispBlue"
-//             type="matrix"
-//             values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
-//             result="blue"
-//           />
-//           <feBlend in="red" in2="green" mode="screen" result="rg" />
-//           <feBlend in="rg" in2="blue" mode="screen" result="output" />
-//           <feGaussianBlur in="output" stdDeviation="3" />
-//         </filter>
-//       </defs>
-//     </svg>
-//   );
-// }
+const LIQUID_GLASS_FILTER_ID = "liquid-glass-distortion";
+
+function supportsSvgBackdropFilter() {
+  if (typeof CSS === "undefined" || !CSS.supports("backdrop-filter", "blur(1px)")) {
+    return false;
+  }
+
+  // SVG filters inside backdrop-filter are Chromium-only; Firefox/Safari
+  // may pass @supports(url()) but still render a transparent panel.
+  return (
+    /\b(Chrome|Chromium|Edg|OPR)\//.test(navigator.userAgent) &&
+    !/Firefox/i.test(navigator.userAgent)
+  );
+}
+
+function LiquidGlassFilter() {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      style={{ position: "absolute", width: 0, height: 0, pointerEvents: "none", overflow: "hidden" }}
+    >
+      <filter
+        id={LIQUID_GLASS_FILTER_ID}
+        colorInterpolationFilters="sRGB"
+        x="0%"
+        y="0%"
+        width="100%"
+        height="100%"
+      >
+        <feImage
+          href="/liquid-lens-map.png"
+          preserveAspectRatio="none"
+          x="0"
+          y="0"
+          width="100%"
+          height="100%"
+          result="map"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="map"
+          scale={-22}
+          xChannelSelector="R"
+          yChannelSelector="G"
+          result="dispRed"
+        />
+        <feColorMatrix
+          in="dispRed"
+          type="matrix"
+          values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
+          result="red"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="map"
+          scale={-24}
+          xChannelSelector="R"
+          yChannelSelector="G"
+          result="dispGreen"
+        />
+        <feColorMatrix
+          in="dispGreen"
+          type="matrix"
+          values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
+          result="green"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="map"
+          scale={-26}
+          xChannelSelector="R"
+          yChannelSelector="G"
+          result="dispBlue"
+        />
+        <feColorMatrix
+          in="dispBlue"
+          type="matrix"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
+          result="blue"
+        />
+        <feBlend in="red" in2="green" mode="screen" result="rg" />
+        <feBlend in="rg" in2="blue" mode="screen" result="output" />
+        <feGaussianBlur in="output" stdDeviation="3" />
+      </filter>
+    </svg>
+  );
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -134,6 +153,21 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", onResize);
   }, [resetToActive]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const enabled = supportsSvgBackdropFilter();
+
+    if (enabled) {
+      root.dataset.liquidGlass = "true";
+    } else {
+      delete root.dataset.liquidGlass;
+    }
+
+    return () => {
+      delete root.dataset.liquidGlass;
+    };
+  }, []);
+
   const openDropdown = () => {
     clearTimeout(closeTimer.current);
     setCoursesOpen(true);
@@ -145,7 +179,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* <LiquidGlassFilter /> */}
+      <LiquidGlassFilter />
       <header className="navbar">
         <div className="container navbar-inner">
           <NavLink to="/" className="navbar-brand" onClick={() => setOpen(false)}>

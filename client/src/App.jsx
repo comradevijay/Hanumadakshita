@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import ParticlesBackground from "./components/ParticlesBackground";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
@@ -12,8 +10,7 @@ import Enroll from "./pages/Enroll";
 export default function App() {
   return (
     <>
-      <ParticlesBackground />
-      <Navbar />
+      
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

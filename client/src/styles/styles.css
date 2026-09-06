@@ -230,7 +230,6 @@ img {
   border: 1px solid #ffffff;
   background-color: rgba(255, 240, 240, 0.466);
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
 }
 .btn-white:active {
   box-shadow:
@@ -370,7 +369,6 @@ section {
     rgba(219, 230, 255, 0.22) 100%
   );
   backdrop-filter: blur(14px) saturate(190%) contrast(1.04);
-  -webkit-backdrop-filter: blur(14px) saturate(190%) contrast(1.04);
   border-radius: inherit;
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.85),
@@ -379,12 +377,8 @@ section {
   pointer-events: none;
 }
 
-@supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
-  .navbar::before {
-    backdrop-filter: url(#liquid-glass-distortion) blur(8px) saturate(160%);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(8px)
-      saturate(160%);
-  }
+html[data-liquid-glass="true"] .navbar::before {
+  backdrop-filter: url(#liquid-glass-distortion) blur(8px) saturate(160%);
 }
 
 .navbar-inner {
@@ -458,7 +452,6 @@ section {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(18px) saturate(115%) contrast(1.03);
-  -webkit-backdrop-filter: blur(18px) saturate(115%) contrast(1.03);
   border: 1px solid rgba(255, 255, 255, 0.75);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.9),
@@ -504,12 +497,8 @@ section {
   pointer-events: none;
 }
 
-@supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
-  .nav-indicator {
-    backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(160%);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(14px)
-      saturate(160%);
-  }
+html[data-liquid-glass="true"] .nav-indicator {
+  backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(160%);
 }
 
 .navbar-links a {
@@ -576,7 +565,6 @@ section {
     rgba(219, 230, 255, 0.26) 100%
   );
   backdrop-filter: blur(26px) saturate(190%) contrast(1.05);
-  -webkit-backdrop-filter: blur(26px) saturate(190%) contrast(1.05);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 20px;
   box-shadow:
@@ -590,12 +578,8 @@ section {
   overflow: hidden;
 }
 
-@supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
-  .navbar-dropdown-menu-inner {
-    backdrop-filter: url(#liquid-glass-distortion) blur(18px) saturate(150%);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(18px)
-      saturate(150%);
-  }
+html[data-liquid-glass="true"] .navbar-dropdown-menu-inner {
+  backdrop-filter: url(#liquid-glass-distortion) blur(18px) saturate(150%);
 }
 
 @keyframes navDropdownIn {
@@ -634,7 +618,6 @@ section {
   color: var(--blue-deep);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(18px) saturate(115%) contrast(1.03);
-  -webkit-backdrop-filter: blur(18px) saturate(115%) contrast(1.03);
   border: 1px solid rgba(255, 255, 255, 0.75);
 }
 
@@ -673,7 +656,6 @@ section {
   border-radius: inherit;
   background: rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(14px) saturate(115%) contrast(1.05);
-  -webkit-backdrop-filter: blur(14px) saturate(115%) contrast(1.05);
   border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.9),
@@ -682,12 +664,8 @@ section {
   pointer-events: none;
 }
 
-@supports (backdrop-filter: url(#a)) or (-webkit-backdrop-filter: url(#a)) {
-  .navbar-toggle::before {
-    backdrop-filter: url(#liquid-glass-distortion) blur(8px) saturate(130%);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(8px)
-      saturate(130%);
-  }
+html[data-liquid-glass="true"] .navbar-toggle::before {
+  backdrop-filter: url(#liquid-glass-distortion) blur(8px) saturate(130%);
 }
 
 .navbar-toggle:active {
@@ -1088,7 +1066,6 @@ section {
   background: rgba(255, 255, 255, 0.22);
 
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
 
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
@@ -1243,7 +1220,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow:
@@ -1379,7 +1355,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 26px;
@@ -1464,7 +1439,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 30px 36px;
@@ -1556,7 +1530,6 @@ section {
   gap: 14px;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 14px;
   padding: 18px;
@@ -1618,7 +1591,6 @@ section {
   z-index: 3;
   background: rgba(10, 26, 58, 0.55);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   color: #fff;
   font-size: 0.76rem;
   font-weight: 600;
@@ -1631,7 +1603,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 30px 36px;
@@ -1693,7 +1664,6 @@ section {
   width: 210px;
   background: rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(22px) saturate(170%);
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   padding: 16px 18px;
@@ -1908,7 +1878,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 26px;
@@ -2075,7 +2044,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -2142,7 +2110,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 12px;
   box-shadow:
@@ -2255,7 +2222,6 @@ section {
   margin-top: 56px;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -2514,7 +2480,6 @@ section {
   gap: 28px;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 30px;
@@ -2673,7 +2638,6 @@ section {
     rgba(219, 230, 255, 0.22) 100%
   );
   backdrop-filter: blur(14px) saturate(190%) contrast(1.04);
-  -webkit-backdrop-filter: blur(14px) saturate(190%) contrast(1.04);
   border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: var(--radius-lg);
   padding: 28px;
@@ -2851,7 +2815,6 @@ section {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: var(--radius-lg);
   padding: 36px;
