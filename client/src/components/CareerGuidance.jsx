@@ -77,9 +77,7 @@ export default function CareerGuidance() {
             <h3>{c.title}</h3>
             <span className="underline-accent" style={{ margin: "8px 0 10px" }} />
             <p>{c.text}</p>
-            <Link to="/contact" className="cg-card-arrow" aria-label={`Ask about ${c.title}`}>
-              <span aria-hidden="true">→</span>
-            </Link>
+            
           </div>
         ))}
       </div>
