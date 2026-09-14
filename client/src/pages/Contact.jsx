@@ -69,7 +69,7 @@ export default function Contact() {
               </label>
               <label>
                 Message
-                <textarea required rows={5} value={form.body} onChange={update("body")} placeholder="Tell us what you'd like to know" />
+                <textarea required rows={4} value={form.body} onChange={update("body")} placeholder="Tell us what you'd like to know" />
               </label>
               {error && <p className="form-error">{error}</p>}
               <button className="btn btn-primary" type="submit" disabled={state === "submitting"}>

@@ -186,7 +186,7 @@ export default function Testimonials() {
           </h2>
           <span className="underline-accent" />
           <p className="section-sub">
-            Notes from learners who've been through our evening batches.
+            Notes from learners who've been through our batches.
           </p>
         </div>
 

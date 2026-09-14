@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import ProgramBenefits from "../components/Programbenefits";
 import CourseRoadmap from "../components/CourseRoadmap";
 import CourseCurriculum from "../components/CourseCurriculum";
+import NotFound from "./NotFound";
 import { api } from "../api/client";
 
 // Swap in whatever icon set the rest of the site already uses — this
@@ -70,15 +71,7 @@ export default function CourseDetail() {
   }
 
   if (status === "not-found") {
-    return (
-      <div className="course-detail-status">
-        <h2>Course not found</h2>
-        <p>We couldn't find that course.</p>
-        <Link to="/courses" className="btn btn-primary">
-          View all courses
-        </Link>
-      </div>
-    );
+    return <NotFound />;
   }
 
   if (status === "error") {
@@ -86,9 +79,6 @@ export default function CourseDetail() {
       <div className="course-detail-status">
         <h2>Something went wrong</h2>
         <p>Couldn't load this course right now — please try again shortly.</p>
-        <Link to="/courses" className="btn btn-primary">
-          View all courses
-        </Link>
       </div>
     );
   }
@@ -115,7 +105,7 @@ export default function CourseDetail() {
     <div className="course-detail-page">
       <section className="section-head-wrap container">
         <div className="course-detail-inner">
-          <div className="course-detail-main">
+          <div className="course-detail-main" data-reveal>
             <h1>{course.title}</h1>
             <p className="course-detail-tagline">{course.tagline}</p>
 
@@ -132,7 +122,7 @@ export default function CourseDetail() {
             )}
           </div>
 
-          <aside className="course-detail-side">
+          <aside className="course-detail-side" data-reveal>
             <span className={`course-detail-seats ${seatsLeft <= 3 ? "low" : ""}`}>
               {isFull ? "Batch full" : `${seatsLeft} seat${seatsLeft === 1 ? "" : "s"} left`}
             </span>
@@ -163,15 +153,16 @@ export default function CourseDetail() {
             </ul>
           </aside>
         </div>
-      </section>
 
-      {hasBenefits && (
-        <ProgramBenefits
-          eyebrow={benefitsWithIcons.eyebrow}
-          title={benefitsWithIcons.title}
-          items={benefitsWithIcons.items}
-        />
-      )}
+        {hasBenefits && (
+          <ProgramBenefits
+            eyebrow={benefitsWithIcons.eyebrow}
+            title={benefitsWithIcons.title}
+            items={benefitsWithIcons.items}
+            compact
+          />
+        )}
+      </section>
 
       {hasRoadmap && (
         <CourseRoadmap

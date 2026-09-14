@@ -10,7 +10,7 @@ const COLORS = [
   "#1fbce1", // light blue accent
 ];
 
-const PARTICLE_COUNT = 10;
+const PARTICLE_COUNT = 5;
 
 function randomBetween(min, max) {
   return Math.random() * (max - min) + min;

@@ -34,7 +34,7 @@ export default function CourseOffered() {
           </h2>
           <span className="underline-accent" />
           <p className="section-sub">
-            Four evening tracks designed to build in-demand skills and get
+            Four tracks designed to build in-demand skills and get
             you interview-ready.
           </p>
         </div>
@@ -52,11 +52,7 @@ export default function CourseOffered() {
             const seatsLeft = c.seatsTotal - c.seatsFilled;
             return (
               <div className="course-offered-card" key={c._id}>
-                <span className="course-offered-icon" style={{ background: icon.bg, color: icon.fg }}>
-                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-                    <path d={icon.path} />
-                  </svg>
-                </span>
+                
                 <h3>{c.title}</h3>
                 <span className="underline-accent" style={{ margin: "8px 0 12px" }} />
                 <p>{c.tagline}</p>
@@ -64,17 +60,9 @@ export default function CourseOffered() {
                   <Link to={`/courses/${c.slug}`} className="course-offered-link">
                     View Details <span aria-hidden="true">→</span>
                   </Link>
-                  <Link
-                    to={`/enroll?course=${c.slug}`}
-                    className="course-offered-arrow"
-                    aria-label={`Enroll in ${c.title}`}
-                  >
-                    <span aria-hidden="true">→</span>
-                  </Link>
+                  
                 </div>
-                <span className={`course-offered-seats ${seatsLeft <= 3 ? "low" : ""}`}>
-                  {seatsLeft > 0 ? `${seatsLeft} seats left` : "Batch full"}
-                </span>
+                
               </div>
             );
           })}

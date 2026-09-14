@@ -52,11 +52,10 @@ export default function Footer() {
                 <path d="m12 3-9 4.5 9 4.5 7.2-3.6V13h1.4V7.5L12 3ZM6.6 10.4v3.5c0 1.5 2.4 2.7 5.4 2.7s5.4-1.2 5.4-2.7v-3.5L12 12.6l-5.4-2.2Z" />
               </svg>
             </span>
-            Hanuma<span>dakshita</span>
+            Hanumadakshita
           </div>
-          <p className="footer-tagline">Learn. Practice. Get Hired.</p>
           <p className="footer-desc">
-            An evening-batch coding academy in Madanapalle, AP, running live
+            A coding academy in Madanapalle, AP, running live
             Python, Java, web development, and database courses, Monday to
             Friday.
           </p>
@@ -83,9 +82,8 @@ export default function Footer() {
         <div className="footer-col">
           <h4>Courses</h4>
           {courseLinks.map((c) => (
-            <Link key={c.slug} to={`/courses/${c.slug}`}>{c.title}</Link>
+            <Link key={c.slug} to={`/${c.slug}`}>{c.title}</Link>
           ))}
-          <Link to="/courses" className="footer-view-all">View All Courses →</Link>
         </div>
 
         <div className="footer-col">

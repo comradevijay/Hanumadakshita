@@ -44,7 +44,7 @@ const courseSchema = new mongoose.Schema(
     description: { type: String, required: true },
     stack: [{ type: String }],
     duration: { type: String, required: true },
-    schedule: { type: String, default: "Mon–Fri, Evening" },
+    schedule: { type: String, default: "Mon–Fri" },
     seatsTotal: { type: Number, default: 20 },
     seatsFilled: { type: Number, default: 0 },
     active: { type: Boolean, default: true },
@@ -53,8 +53,6 @@ const courseSchema = new mongoose.Schema(
     // without this data still work; CourseDetail.jsx should handle
     // benefits/roadmap/curriculum being absent.
     benefits: {
-      eyebrow: { type: String, default: "Program Benefits" },
-      title: { type: String, default: "Why choose this program?" },
       items: [benefitItemSchema],
     },
     roadmap: {

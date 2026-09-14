@@ -41,11 +41,25 @@ export default function Enroll() {
       <div className="container form-page-inner">
         <div className="form-page-copy">
           <span className="eyebrow">Reserve a seat</span>
-          <h1>Book your spot in the next evening batch</h1>
+          <h1>Book your spot in the next batch</h1>
           <p>
             Seats are limited per batch. Submit your details and we'll
             confirm your slot by phone or email within a day.
           </p>
+           <div className="form-page-details">
+            <div>
+              <span>Phone</span>
+              <a href="tel:+919573832026">+91 95738 32026</a>
+            </div>
+            <div>
+              <span>Email</span>
+              <a href="mailto:charankaramala49@gmail.com">charankaramala49@gmail.com</a>
+            </div>
+            <div>
+              <span>Office</span>
+              <p>No. 16/497, Lachhareddy Street, Madanapalle, Chittoor, AP 517325</p>
+            </div>
+          </div>
         </div>
 
         <div className="form-page-card">
@@ -89,7 +103,7 @@ export default function Enroll() {
               </label>
               <label>
                 Anything we should know? (optional)
-                <textarea rows={4} value={form.message} onChange={update("message")} placeholder="Prior experience, preferred batch, questions…" />
+                <textarea rows={2} value={form.message} onChange={update("message")} placeholder="Prior experience, preferred batch, questions…" />
               </label>
               {error && <p className="form-error">{error}</p>}
               <button className="btn btn-primary" type="submit" disabled={state === "submitting"}>

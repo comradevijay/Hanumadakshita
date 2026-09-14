@@ -7,18 +7,148 @@
 /* ============================================================ */
 /* pages/About.css
 /* ============================================================ */
+/* ============================================================
+   ABOUT HERO — TAP INSPIRED
+   Keeps the existing site background and particles
+   ============================================================ */
 
-.about-hero h1 {
-  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
-  margin-top: 12px;
-  max-width: 24ch;
+.about-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 150px 0 90px;
 }
 
-.about-hero p {
-  margin-top: 18px;
-  max-width: 62ch;
-  color: rgba(28, 28, 28, 0.7);
-  font-size: 1.02rem;
+.about-hero-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 55px;
+  text-align: center;
+}
+
+/* -------------------------
+   Eyebrow
+   ------------------------- */
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 30px;
+
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  color: var(--ink);
+}
+
+.about-eyebrow-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+/* -------------------------
+   Main heading
+   ------------------------- */
+
+.about-hero-title {
+  max-width: 1050px;
+  margin: 0 auto;
+
+  font-family: "Google Sans Flex", var(--font-body);
+  font-size: clamp(3.4rem, 6.2vw, 6.2rem);
+  font-weight: 450;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+
+  color: var(--ink);
+}
+
+.about-hero-title span {
+  color: var(--blue);
+}
+
+/* -------------------------
+   Description
+   ------------------------- */
+
+.about-hero-description {
+  max-width: 760px;
+  margin: 38px auto 0;
+
+  font-family: "Google Sans Flex", var(--font-body);
+  font-size: 1.08rem;
+  font-weight: 400;
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+.about-hero-description-small {
+  max-width: 620px;
+  margin-top: 12px;
+}
+
+/* -------------------------
+   Statistics
+   ------------------------- */
+
+.about-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  max-width: 900px;
+  margin: 58px auto 0;
+
+  border-top: 1px solid var(--line);
+}
+
+.about-stat {
+  position: relative;
+  padding: 27px 20px 10px;
+}
+
+.about-stat:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  top: 28px;
+  right: 0;
+
+  width: 1px;
+  height: 52px;
+
+  background: var(--line);
+}
+
+.about-stat strong {
+  display: block;
+
+  font-family: "Google Sans Flex", var(--font-body);
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.1;
+
+  color: var(--ink);
+}
+
+.about-stat span {
+  display: block;
+
+  margin-top: 9px;
+
+  font-family: var(--font-body);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: #8993a2;
 }
 
 .about-grid {
@@ -81,96 +211,6 @@
   margin: 6px 0 0;
   font-size: 0.92rem;
   font-weight: 600;
-}
-
-/* ============================================================ */
-/* pages/Courses.css
-/* ============================================================ */
-
-.courses-page h1 {
-  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-  margin-top: 12px;
-}
-
-.courses-intro {
-  margin-top: 14px;
-  max-width: 56ch;
-  color: rgba(28, 28, 28, 0.68);
-}
-
-.courses-list {
-  margin-top: 44px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.course-row {
-  display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 28px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 30px;
-  background: #fff;
-}
-
-.course-row h2 {
-  font-size: 1.35rem;
-}
-
-.course-row-main p {
-  margin-top: 10px;
-  color: rgba(28, 28, 28, 0.68);
-  font-size: 0.94rem;
-  max-width: 62ch;
-}
-
-.course-row-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-}
-
-.course-row-stack span {
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: rgba(15, 46, 56, 0.06);
-  color: var(--ink);
-}
-
-.course-row-side {
-  border-left: 1px solid var(--line);
-  padding-left: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  justify-content: center;
-}
-
-.course-row-duration {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-.course-row-schedule {
-  font-size: 0.82rem;
-  color: rgba(28, 28, 28, 0.6);
-}
-
-.course-row-seats {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--green);
-  margin-bottom: 6px;
-}
-
-.course-row-seats.low {
-  color: #b5502f;
 }
 
 /* ============================================================ */
@@ -355,7 +395,7 @@
 /* ============================================================ */
 
 .course-curriculum {
-  background: linear-gradient(180deg, #dbe6ff 0%, #eaf0fd 45%, #f5f8ff 100%);
+  background: linear-gradient(180deg, #f5f8ff  0%, #eaf0fd 45%,  #dbe6ff 100%);
 }
 
 /* ---- intro cards (01 / 02 / 03) ---- */
@@ -512,7 +552,7 @@
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.55); 
   border-radius: var(--radius-lg);
   padding: 30px 32px;
   box-shadow:
@@ -547,7 +587,9 @@
   background: rgba(255, 255, 255, 0.3);
   box-shadow:
     0 18px 40px rgba(36, 78, 140, 0.16),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    inset 0 1px  rgba(255, 255, 255, 0.7);
+    
+  border: 2px solid #c0dbef; 
 }
  
 .curriculum-card-bignum {

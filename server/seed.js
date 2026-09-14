@@ -4,13 +4,11 @@ import Course from "./models/Course.js";
 
 // Shared benefits
 const defaultBenefits = {
-  eyebrow: "Program Benefits",
-  title: "Why choose this program?",
   items: [
     {
       icon: "check",
-      title: "Job Guarantee",
-      desc: "100% job assistance until you get placed.",
+      title: "Skills",
+      desc: "100% Job ready skills with career guidence.",
     },
     {
       icon: "mentor",
@@ -51,7 +49,7 @@ const courses = [
       eyebrow: "Course Roadmap",
       title: "Become job-ready in 100 days.",
       subtitle:
-        "Master Python essentials to full-stack development in 100 days, with guaranteed placement support at the finish line.",
+        "Master Python essentials to full-stack development in 100 days.",
 
       phases: [
         {
@@ -203,7 +201,7 @@ const courses = [
       eyebrow: "Course Roadmap",
       title: "Become job-ready in 100 days.",
       subtitle:
-        "Master Core Java through enterprise Spring Boot development, with guaranteed placement support at the finish line.",
+        "Master Core Java through enterprise Spring Boot development.",
 
       phases: [
         {
@@ -355,7 +353,7 @@ const courses = [
       eyebrow: "Course Roadmap",
       title: "Become job-ready in 100 days.",
       subtitle:
-        "Master modern web development from fundamentals to React, with guaranteed placement support at the finish line.",
+        "Master modern web development from fundamentals to React.",
 
       phases: [
         {
@@ -497,7 +495,7 @@ const courses = [
       eyebrow: "Course Roadmap",
       title: "Become database-ready in 60 days.",
       subtitle:
-        "Master both relational and NoSQL databases, with guaranteed placement support at the finish line.",
+        "Master both relational and NoSQL databases.",
 
       phases: [
         {

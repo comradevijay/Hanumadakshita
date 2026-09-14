@@ -2,8 +2,8 @@
 /* styles.css — global tokens & base styles
 /* ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital@1&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +38,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -110,7 +109,8 @@ img {
   gap: 8px;
   padding: 8px 18px;
   border-radius: 30px;
-  background: var(--blue-pale);
+  background: #e9f2f9;
+  border: 1px solid #d1e0f0;
   color: var(--blue-deep);
   font-size: 0.78rem;
   font-weight: 700;
@@ -362,23 +362,14 @@ section {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.32) 0%,
-    rgba(244, 247, 255, 0.18) 50%,
-    rgba(219, 230, 255, 0.22) 100%
-  );
-  backdrop-filter: blur(14px) saturate(190%) contrast(1.04);
+
+  backdrop-filter: blur(10px) contrast(1.04);
   border-radius: inherit;
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.85),
-    inset 0 -8px 16px -12px rgba(47, 94, 255, 0.28),
-    0 12px 30px -14px rgba(10, 26, 58, 0.4);
-  pointer-events: none;
-}
+    0 12px 30px -14px rgba(10, 26, 58, 0.25);
 
-html[data-liquid-glass="true"] .navbar::before {
-  backdrop-filter: url(#liquid-glass-distortion) blur(8px) saturate(160%);
+  pointer-events: none;
 }
 
 .navbar-inner {
@@ -767,9 +758,8 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
 
 .hero-stats {
   position: relative;
-  background: var(--white);
-  border-radius: var(--radius-lg, 20px);
-  box-shadow: 0 20px 50px -18px rgba(10, 26, 58, 0.18);
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(24px) saturate(160%);
   padding: 30px 36px;
   display: flex;
   justify-content: space-between;
@@ -777,6 +767,12 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
   flex-wrap: wrap;
   gap: 24px;
   max-width: 720px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow:
+    0 10px 30px rgba(36, 78, 140, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.55);
 }
 
 .hero-stat {
@@ -1115,16 +1111,6 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
     inset 0 1px 1px rgba(255, 255, 255, 0.7);
 }
 
-.course-offered-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-
 .course-offered-card h3 {
   font-size: 1.15rem;
   color: var(--ink);
@@ -1152,43 +1138,15 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
   gap: 6px;
 }
 
-.course-offered-arrow {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink);
-  flex-shrink: 0;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-}
 
-.course-offered-arrow:hover {
-  background: var(--blue);
-  color: #fff;
-}
-
-.course-offered-seats {
-  margin-top: 14px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  color: var(--green);
-}
-
-.course-offered-seats.low {
-  color: #d1583a;
-}
 
 /* ============================================================ */
 /* components/CareerGuidance.css
 /* ============================================================ */
 
 .career-guidance {
-  background: linear-gradient(180deg, #f5f8ff 0%, #eef3ff 55%, #e2ebff 100%);
+  
+  background: linear-gradient(180deg, #dbe6ff 0%, #eaf0fd 45%, #f5f8ff 100%);
 }
 
 .career-guidance-top {
@@ -1498,7 +1456,7 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
 /* ============================================================ */
 
 .expert-mentorship {
-  background: linear-gradient(180deg, #e2ebff 0%, #eef3ff 55%, #f7f9ff 100%);
+  background: linear-gradient(180deg, #f5f8ff 0%, #eef3ff 55%, #e2ebff 100%);
 }
 
 .em-top {
@@ -1840,9 +1798,95 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
   width: 230px;
 }
 
-@media (max-width: 980px) {
-  .em-visual {
-    display: none;
+/* ---- gentle floating motion for the visual cards ---- */
+/* ---- gentle floating motion for the visual cards ---- */
+@keyframes cardFloatA {
+  0%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(8px, -10px);
+  }
+  50% {
+    transform: translate(-6px, -16px);
+  }
+  75% {
+    transform: translate(-10px, -6px);
+  }
+}
+
+@keyframes cardFloatB {
+  0%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(-10px, -8px);
+  }
+  50% {
+    transform: translate(6px, -18px);
+  }
+  75% {
+    transform: translate(10px, -4px);
+  }
+}
+
+@keyframes cardFloatC {
+  0%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(9px, -6px);
+  }
+  50% {
+    transform: translate(4px, -14px);
+  }
+  75% {
+    transform: translate(-8px, -8px);
+  }
+}
+
+.em-visual .float-card,
+.em-visual .left-card {
+  animation: cardFloatA 7s ease-in-out infinite;
+}
+
+#card-qe {
+  animation-name: cardFloatA;
+  animation-duration: 7s;
+  animation-delay: 0s;
+}
+
+#card-community {
+  animation-name: cardFloatB;
+  animation-duration: 8s;
+  animation-delay: 0.6s;
+}
+
+#card-hands {
+  animation-name: cardFloatC;
+  animation-duration: 6.5s;
+  animation-delay: 1.2s;
+}
+
+#card-code {
+  animation-name: cardFloatB;
+  animation-duration: 7.5s;
+  animation-delay: 0.3s;
+}
+
+#card-vision {
+  animation-name: cardFloatA;
+  animation-duration: 9s;
+  animation-delay: 1.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .em-visual .float-card,
+  .em-visual .left-card {
+    animation: none;
   }
 }
 
@@ -1851,7 +1895,7 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
 /* ============================================================ */
 
 .testimonials {
-  background: linear-gradient(180deg, #f7f9ff 0%, #f5f8ff 50%, #eef3ff 100%);
+  background: linear-gradient(180deg, #e2ebff 0%, #eef3ff 55%, #f7f9ff 100%);
 }
 
 /* Horizontal scrolling track (replaces the old 4-col grid) */
@@ -2001,7 +2045,7 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
 /* ============================================================ */
 
 .faq {
-  background: linear-gradient(180deg, #eef3ff 0%, #f7f9ff 55%, #ffffff 100%);
+  background: linear-gradient(180deg, #f7f9ff 0%, #f5f8ff 50%, #eef3ff 100%);
 }
 
 .faq .section-head h2 {
@@ -2320,7 +2364,7 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
 /* ============================================================ */
 
 .course-roadmap {
-  background: linear-gradient(180deg, #f5f8ff 0%, #eaf0fd 45%, #dbe6ff 100%);
+  background: linear-gradient(180deg, #dbe6ff  0%, #eaf0fd 45%, #f5f8ff 100%);
 }
 
 .roadmap-list {
@@ -2934,4 +2978,279 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
   .particle-dot {
     animation: none;
   }
+}
+
+/* ============================================================ */
+/* Global scroll-reveal (driven by SmoothScroll.jsx observers)
+/* ============================================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+[data-reveal].reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger children within a group — index set via inline --reveal-index */
+[data-reveal-group] > [data-reveal] {
+  transition-delay: calc(var(--reveal-index, 0) * 0.08s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================ */
+/* pages/NotFound.css
+/* ============================================================ */
+
+.not-found-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 100px;
+  overflow: hidden;
+}
+
+.not-found-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(14rem, 34vw, 26rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(47, 94, 255, 0.14);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.not-found-page .eyebrow-pill {
+  position: relative;
+  z-index: 1;
+}
+
+.not-found-page h1 {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.not-found-page p {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.not-found-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 50px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.not-found-actions .btn-outline-blue,
+.not-found-actions .btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+}
+
+.not-found-actions .btn-outline-blue {
+  backdrop-filter: blur(10px) contrast(1.04);
+}
+
+.btn-send {
+  font-family: inherit;
+  font-size: 20px;
+  background: var(--blue-pale);
+  color: black;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--blue);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn-send span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-send svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-send:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.btn-send:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.btn-send:hover span {
+  transform: translateX(5em);
+}
+
+.btn-send:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+/* 1. Define the slide-up reveal animation */
+@keyframes textReveal {
+  0% {
+    clip-path: inset(0 0 100% 0); /* Cuts off the bottom */
+    transform: translateY(60px); /* Starts pushed down */
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0 0 0% 0); /* Fully revealed */
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 2. Target all headings, paragraphs, and hero text automatically */
+h1,
+h2,
+h3,
+h4,
+p {
+  animation: textReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity, clip-path;
+}
+
+/* 3. Automatic Stagger Delays using natural hierarchy */
+h1 {
+  animation-delay: 0.15s;
+}
+
+h2,
+h3 {
+  animation-delay: 0.25s;
+}
+
+p {
+  animation-delay: 0.4s;
+}
+
+/* 4. Ensure child elements inside common layout containers stagger smoothly */
+section > *:nth-child(1),
+.hero-content > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+section > *:nth-child(2),
+.hero-content > *:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+section > *:nth-child(3),
+.hero-content > *:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+section > *:nth-child(4),
+.hero-content > *:nth-child(4) {
+  animation-delay: 0.55s;
+}
+
+/* Base state: Hidden and masked below */
+h1,
+h2,
+h3,
+h4,
+p {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(45px);
+  opacity: 0;
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, clip-path;
+}
+
+/* Active state: Triggered when scrolled into view */
+h1.is-visible,
+h2.is-visible,
+h3.is-visible,
+h4.is-visible,
+p.is-visible {
+  clip-path: inset(0 0 0% 0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Natural staggered delays when elements are stacked */
+section > *:nth-child(1).is-visible {
+  transition-delay: 0.05s;
+}
+section > *:nth-child(2).is-visible {
+  transition-delay: 0.18s;
+}
+section > *:nth-child(3).is-visible {
+  transition-delay: 0.32s;
+}
+section > *:nth-child(4).is-visible {
+  transition-delay: 0.45s;
+}
+
+
+[data-reveal],
+[data-reveal-item] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-	import "../styles/styles.css";
+import "../styles/styles.css";
 
 const cards = [
   {
@@ -50,7 +50,7 @@ export default function CareerGuidance() {
   return (
     <section className="career-guidance">
       <div className="container career-guidance-top">
-        <div className="career-guidance-copy">
+        <div className="career-guidance-copy" data-reveal>
           <span className="eyebrow-pill">CAREER GUIDANCE</span>
           <h2>
             Guiding You Towards
@@ -66,9 +66,9 @@ export default function CareerGuidance() {
 
       </div>
 
-      <div className="container career-guidance-grid">
+      <div className="container career-guidance-grid" data-reveal-group>
         {cards.map((c) => (
-          <div className="cg-card" key={c.title}>
+          <div className="cg-card" data-reveal-item key={c.title}>
             <span className="cg-card-icon" style={{ background: c.color, color: c.fg }}>
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                 <path d={c.path} />
@@ -85,7 +85,7 @@ export default function CareerGuidance() {
       </div>
 
       <div className="container">
-        <div className="career-guidance-banner">
+        <div className="career-guidance-banner" data-reveal>
           <span className="cg-banner-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
               <path d="M12 1a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Zm7 9a7 7 0 0 1-14 0H3a9 9 0 0 0 8 8.94V22h2v-3.06A9 9 0 0 0 21 10Z" />

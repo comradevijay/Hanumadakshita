@@ -5,7 +5,7 @@ import "../styles/styles.css";
 const faqs = [
   {
     q: "What courses do you offer?",
-    a: "We offer four evening tracks: Python Full Stack, Java Full Stack, Web Development, and SQL & MongoDB — each built to take you from fundamentals to a working project.",
+    a: "We offer four tracks: Python Full Stack, Java Full Stack, Web Development, and SQL & MongoDB — each built to take you from fundamentals to a working project.",
   },
   {
     q: "Are the courses suitable for beginners?",
@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "How are the classes conducted?",
-    a: "Classes run live, Monday to Friday in the evening, both in-person at our Madanapalle office and online for remote learners.",
+    a: "Classes run live, Monday to Friday, both in-person at our Madanapalle office and online for remote learners.",
   },
   {
     q: "Will I get study materials?",
@@ -103,7 +103,7 @@ export default function FAQ() {
   return (
     <section className="faq">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <span className="eyebrow-pill">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4 4h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4V5a1 1 0 0 1 1-1Z" /></svg>
             FREQUENTLY ASKED QUESTIONS
@@ -116,7 +116,7 @@ export default function FAQ() {
         </div>
 
         <div className="faq-layout">
-          <div className="faq-side">
+          <div className="faq-side" data-reveal>
             <div className="faq-side-illustration" aria-hidden="true">
               <FaqIllustration />
             </div>
@@ -134,11 +134,11 @@ export default function FAQ() {
             </div>
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list" data-reveal-group>
             {faqs.map((item, i) => {
               const isOpen = open === i;
               return (
-                <div className={`faq-item ${isOpen ? "is-open" : ""}`} key={item.q}>
+                <div className={`faq-item ${isOpen ? "is-open" : ""}`} data-reveal-item key={item.q}>
                   <button
                     className="faq-item-head"
                     onClick={() => setOpen(isOpen ? -1 : i)}
@@ -155,7 +155,7 @@ export default function FAQ() {
           </div>
         </div>
 
-        <div className="faq-footer-note">
+        <div className="faq-footer-note" data-reveal>
           <span className="faq-footer-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v.01L12 12l8-5.99V6H4Zm16 2.24-7.4 5.55a1 1 0 0 1-1.2 0L4 8.24V18h16V8.24Z" /></svg>
           </span>

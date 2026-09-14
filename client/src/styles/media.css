@@ -58,7 +58,8 @@
 
   html[data-liquid-glass="true"] .navbar-links {
     backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(14px) saturate(150%);
+    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(14px)
+      saturate(150%);
   }
 
   .navbar-links.is-open {
@@ -148,10 +149,14 @@
       0 6px 16px -10px rgba(10, 26, 58, 0.3);
   }
 
-  html[data-liquid-glass="true"] .navbar-links a:active:not(.navbar-links-cta-mobile),
+  html[data-liquid-glass="true"]
+    .navbar-links
+    a:active:not(.navbar-links-cta-mobile),
   html[data-liquid-glass="true"] .navbar-dropdown-trigger:active {
-    backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%) brightness(1.03);
+    backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%)
+      brightness(1.03);
+    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(12px)
+      saturate(115%) brightness(1.03);
   }
 }
 
@@ -311,6 +316,7 @@
 
 @media (max-width: 900px) {
   .program-benefits-grid {
+    
     grid-template-columns: repeat(2, 1fr);
   }
   .benefit-divider {
@@ -354,8 +360,6 @@
   }
 }
 
-
-
 @media (max-width: 760px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -364,7 +368,7 @@
     grid-template-columns: 1fr 1fr;
   }
 }
- 
+
 @media (max-width: 700px) {
   .course-row {
     grid-template-columns: 1fr;
@@ -376,66 +380,76 @@
     padding-top: 18px;
   }
 }
- 
+
 @media (max-width: 760px) {
   .course-detail-inner {
     grid-template-columns: 1fr;
   }
+  .course-detail-main {
+    width: 90%;
+    justify-self: center;
+  }
   .course-detail-side {
     position: static;
+    width: 90%;
+    justify-self: center;
+  }
+
+  .roadmap-phase-visual {
+    display: none;
+  }
+  .benefit-card {
+    padding: 10px 28px;
   }
 }
- 
+
 @media (max-width: 800px) {
   .form-page-inner {
     grid-template-columns: 1fr;
   }
 }
 
-
 @media (max-width: 900px) {
   .curriculum-layout {
     grid-template-columns: 1fr;
     gap: 24px;
   }
- 
+  .program-benefits-grid {
+    justify-items:center;
+  }
+
+  .benefit-card {
+    padding: 10px 28px;
+  }
   .curriculum-sidebar {
     position: static;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    font-size: 20px;
   }
- 
+
   .curriculum-sidebar-list {
-    flex-direction: row;
-    gap: 8px;
-    padding-bottom: 4px;
+    display:none;
   }
- 
-  .curriculum-sidebar-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    width: auto;
-    flex-shrink: 0;
-    border-left: none;
-    border-bottom: 2px solid var(--line);
-    padding: 10px 14px;
-    white-space: nowrap;
-  }
- 
-  .curriculum-sidebar-item.active {
-    border-left: none;
-    border-bottom-color: var(--blue);
-  }
- 
+
+  .curriculum-sidebar-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  } 
+
+  
   .curriculum-sidebar-count {
     display: none;
   }
 }
- 
+
 @media (max-width: 560px) {
   .curriculum-card {
     padding: 24px 20px;
   }
 }
- 

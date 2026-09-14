@@ -13,7 +13,7 @@ export default function Home() {
       <ParticlesBackground />
       <Navbar />
       <Hero />
-      <CourseOffered />
+      {/* <CourseOffered /> */}
       <CareerGuidance />
       <ExpertMentorship />
       <Testimonials />

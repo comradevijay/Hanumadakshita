@@ -7,21 +7,22 @@ export default function Hero() {
     <section className="hero">
       <HeroBackground />
       <div className="container hero-inner">
-        <div className="hero-copy">
+        <div className="hero-copy" data-reveal>
           <span className="eyebrow-pill">LEARN • BUILD • GROW</span>
           <h1>
-            Today Skills.
+            Learn Today.
             <br />
-            <span className="hero-accent">Tomorrow Career.</span>
+            <span className="hero-accent">Lead Tomorrow.</span>
           </h1>
           <span className="underline-accent" />
           <p className="hero-sub">
             Industry-focused training with real projects, practical learning, and the skills employers are looking which makes you job ready.
           </p>
           <div className="hero-actions">
-            <Link to="/courses" className="btn btn-primary">
-              Explore Courses <span aria-hidden="true">→</span>
+            <Link to="/enroll" className="btn btn-primary">
+              Enroll Course<span aria-hidden="true">→</span>
             </Link>
+
             <a
               className="btn btn-white"
               href="https://wa.me/919573832026"

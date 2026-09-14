@@ -218,7 +218,7 @@ export default function CourseRoadmap({ eyebrow, title, subtitle, phases }) {
   return (
     <section className="course-roadmap">
       <div className="container">
-        <div className="section-head left">
+        <div className="section-head left" data-reveal>
           {eyebrow && (
             <span className="eyebrow-pill">
               <span className="eyebrow-dot" aria-hidden="true" />

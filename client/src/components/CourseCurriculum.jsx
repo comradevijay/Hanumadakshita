@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 function CurriculumIntroCard({ number, title, desc }) {
   return (
-    <div className="curriculum-intro-card">
+    <div className="curriculum-intro-card" data-reveal-item>
       <span className="curriculum-intro-number">{number}</span>
       <h3>{title}</h3>
       <p>{desc}</p>
@@ -200,7 +200,7 @@ export default function CourseCurriculum({ eyebrow, title, subtitle, intro, modu
   return (
     <section className="course-curriculum">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           {eyebrow && (
             <span className="eyebrow-pill">
               <span className="eyebrow-dot" aria-hidden="true" />
@@ -212,7 +212,7 @@ export default function CourseCurriculum({ eyebrow, title, subtitle, intro, modu
         </div>
 
         {hasIntro && (
-          <div className="curriculum-intro-grid">
+          <div className="curriculum-intro-grid" data-reveal-group>
             {intro.map((item, i) => (
               <CurriculumIntroCard
                 key={i}

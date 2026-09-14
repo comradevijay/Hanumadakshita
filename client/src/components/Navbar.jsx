@@ -251,13 +251,10 @@ export default function Navbar() {
                 <div className="navbar-dropdown-menu">
                   <div className="navbar-dropdown-menu-inner">
                     {courseLinks.map((c) => (
-                      <Link key={c.slug} to={`/courses/${c.slug}`} onClick={() => { setOpen(false); setCoursesOpen(false); }}>
+                      <Link key={c.slug} to={`/${c.slug}`} onClick={() => { setOpen(false); setCoursesOpen(false); }}>
                         {c.title}
                       </Link>
                     ))}
-                    <Link to="/courses" className="navbar-dropdown-all" onClick={() => { setOpen(false); setCoursesOpen(false); }}>
-                      View All Courses →
-                    </Link>
                   </div>
                 </div>
               )}

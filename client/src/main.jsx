@@ -2,8 +2,8 @@ import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import "./styles/styles.css";
-import "./styles/media.css";
 import "./styles/pages.css";
+import "./styles/media.css";
 import App from "./App.jsx";
 
 function ScrollToTop() {
