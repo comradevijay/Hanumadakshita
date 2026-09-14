@@ -1,36 +1,118 @@
 # Hanumadakshita Evolving Skills Pvt. Ltd.
 
-A full-stack web application developed for **Hanumadakshita Evolving Skills Pvt. Ltd.** The platform is designed to showcase the institute, its training programs, courses, and learning opportunities through a modern and responsive web experience.
+A modern, responsive **full-stack educational institute website** developed for **Hanumadakshita Evolving Skills Pvt. Ltd.**
 
-## 📌 About the Project
+The platform provides information about the institute, training programs, courses, skill-development opportunities, and enquiry/contact services through a clean and responsive web interface.
 
-This project is the official website application for **Hanumadakshita Evolving Skills Pvt. Ltd.**, developed with a separate frontend and backend architecture.
+## 🌐 Live Website
 
-The application provides a structured platform to present:
+**Live Demo:**
+https://hanumadakshita.onrender.com/
 
-* Institute information
-* Available courses and training programs
-* Skill development opportunities
-* Student-focused learning content
-* Contact and enquiry functionality
+**GitHub Repository:**
+https://github.com/comradevijay/Hanumadakshita
 
 ---
 
-## 🛠️ Tech Stack
+## 📌 About the Project
+
+**Hanumadakshita Evolving Skills** is a full-stack web application designed to establish a professional online presence for an educational and skill-development institute.
+
+The application follows a separate **frontend and backend architecture**, allowing the user interface and server-side functionality to be developed and maintained independently.
+
+The website focuses on:
+
+* Institute information
+* Courses and training programs
+* Skill-development opportunities
+* Student-focused content
+* Contact and enquiry functionality
+* Responsive design across devices
+* Backend API integration
+* Database-driven content
+
+---
+
+## ✨ Key Features
+
+### 🎓 Educational Platform
+
+* Display available courses and training programs
+* Present institute information
+* Showcase skill-development opportunities
+* Provide structured course information
+
+### 📱 Responsive Design
+
+The website is designed to work across:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile devices
+
+### ⚡ Modern User Interface
+
+* Clean and modern design
+* Responsive navigation
+* Interactive UI elements
+* Smooth animations and transitions
+* Structured content sections
+* Mobile-friendly layouts
+
+### 🔗 Full-Stack Architecture
+
+The application uses a separate frontend and backend:
+
+```text
+Frontend
+   ↓
+React + Vite
+   ↓
+REST API
+   ↓
+Node.js + Express
+   ↓
+MongoDB
+```
+
+### 🗄️ Database Integration
+
+MongoDB is used for storing and managing application data through **Mongoose**.
+
+### ⚙️ Environment Configuration
+
+Sensitive configuration values are managed through environment variables instead of being hard-coded into the application.
+
+---
+
+## 🛠️ Technology Stack
 
 ### Frontend
 
-* React
-* Vite
-* JavaScript
-* CSS
+| Technology | Purpose                             |
+| ---------- | ----------------------------------- |
+| React.js   | User interface                      |
+| Vite       | Frontend development and build tool |
+| JavaScript | Application logic                   |
+| CSS3       | Styling and responsive design       |
 
 ### Backend
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
+| Technology | Purpose                        |
+| ---------- | ------------------------------ |
+| Node.js    | Server-side runtime            |
+| Express.js | REST API and backend framework |
+| MongoDB    | Database                       |
+| Mongoose   | MongoDB object modeling        |
+
+### Development Tools
+
+* Git
+* GitHub
+* npm
+* VS Code
+* Render
 
 ---
 
@@ -39,19 +121,21 @@ The application provides a structured platform to present:
 ```text
 Hanumadakshita/
 │
-├── client/                 # Frontend application
+├── client/
 │   ├── public/
 │   ├── src/
 │   ├── .env.example
+│   ├── package.json
 │   ├── package-lock.json
 │   └── vite.config.js
 │
-├── server/                 # Backend application
+├── server/
 │   ├── models/
 │   ├── routes/
 │   ├── .env.example
 │   ├── seed.js
 │   ├── server.js
+│   ├── package.json
 │   └── package-lock.json
 │
 └── README.md
@@ -59,39 +143,28 @@ Hanumadakshita/
 
 ---
 
-## ✨ Features
+# 🚀 Getting Started
 
-* Responsive and modern user interface
-* Course and training program presentation
-* Dedicated sections for institute information
-* Backend API integration
-* Database support for managing application data
-* Structured frontend and backend architecture
-* Environment variable configuration
+Follow these steps to run the project locally.
 
----
-
-## 🚀 Getting Started
-
-### Prerequisites
+## Prerequisites
 
 Make sure you have the following installed:
 
-* Node.js
+* [Node.js](https://nodejs.org/)
 * npm
 * MongoDB
+* Git
 
 ---
 
-## 💻 Installation
-
-### 1. Clone the repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/comradevijay/Hanumadakshita.git
 ```
 
-### 2. Navigate to the project directory
+Navigate into the project:
 
 ```bash
 cd Hanumadakshita
@@ -99,7 +172,7 @@ cd Hanumadakshita
 
 ---
 
-## 🎨 Frontend Setup
+# 🎨 Frontend Setup
 
 Navigate to the client directory:
 
@@ -113,7 +186,13 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file based on `.env.example`.
+Create a `.env` file using the provided example:
+
+```bash
+cp .env.example .env
+```
+
+Configure the required frontend environment variables.
 
 Start the development server:
 
@@ -121,13 +200,13 @@ Start the development server:
 npm run dev
 ```
 
-The frontend application will run on the local development URL provided by Vite.
+The Vite development server will provide the local URL in the terminal.
 
 ---
 
-## ⚙️ Backend Setup
+# ⚙️ Backend Setup
 
-Open a new terminal and navigate to the server directory:
+Open another terminal and navigate to the server:
 
 ```bash
 cd server
@@ -139,15 +218,28 @@ Install dependencies:
 npm install
 ```
 
-Create a `.env` file based on `.env.example` and configure the required environment variables.
+Create the environment file:
 
-Start the server:
+```bash
+cp .env.example .env
+```
+
+Configure the required backend environment variables.
+
+Example:
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+```
+
+Start the backend server:
 
 ```bash
 node server.js
 ```
 
-If a development script is configured, you can also use:
+If a development script is available:
 
 ```bash
 npm run dev
@@ -155,26 +247,25 @@ npm run dev
 
 ---
 
-## 🔐 Environment Variables
+# 🗄️ Database Setup
 
-Refer to the `.env.example` files inside the `client` and `server` directories.
+The project uses **MongoDB** with **Mongoose**.
 
-Typical backend environment variables may include:
+Make sure MongoDB is running and the connection string is correctly configured in the backend `.env` file.
+
+Example:
 
 ```env
-PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 ```
 
-> Never commit your actual `.env` file or sensitive credentials to GitHub.
+The project also includes a database seed file:
 
----
+```text
+server/seed.js
+```
 
-## 🌱 Database Seeding
-
-The backend includes a `seed.js` file for populating initial data.
-
-Run the seed script according to the configuration defined in the server:
+Run the seed script when initial database data needs to be populated:
 
 ```bash
 node seed.js
@@ -182,60 +273,199 @@ node seed.js
 
 ---
 
-## 📱 Responsive Design
+# 🔐 Environment Variables
 
-The application is designed to provide a consistent experience across:
+Environment variables are used to keep configuration and sensitive credentials outside the source code.
 
-* Desktop
-* Laptop
-* Tablet
-* Mobile devices
+### Client
+
+Create:
+
+```text
+client/.env
+```
+
+based on:
+
+```text
+client/.env.example
+```
+
+### Server
+
+Create:
+
+```text
+server/.env
+```
+
+based on:
+
+```text
+server/.env.example
+```
+
+Example backend configuration:
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+```
+
+> **Important:** Never commit `.env` files containing passwords, database credentials, API keys, or other sensitive information to GitHub.
 
 ---
 
-## 🤝 Contributing
+# 🌍 Deployment
+
+The application is deployed and publicly accessible through **Render**.
+
+### Live Application
+
+https://hanumadakshita.onrender.com/
+
+The deployed application provides the production version of the Hanumadakshita Evolving Skills website.
+
+---
+
+# 🔄 Application Architecture
+
+The project follows a client-server architecture:
+
+```text
+                    ┌──────────────────────┐
+                    │      User / Browser  │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   React + Vite       │
+                    │      Frontend        │
+                    └──────────┬───────────┘
+                               │
+                         HTTP / REST API
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │ Node.js + Express    │
+                    │       Backend        │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │       MongoDB        │
+                    │       Database        │
+                    └──────────────────────┘
+```
+
+This separation makes the application easier to maintain, develop, test, and deploy.
+
+---
+
+# 📱 Responsive Design
+
+The application is designed with responsive layouts so that users can access the website comfortably on different screen sizes.
+
+Supported devices include:
+
+* 🖥️ Desktop
+* 💻 Laptop
+* 📱 Mobile
+* 📲 Tablet
+
+---
+
+# 🧩 Main Project Modules
+
+The application contains several major sections for presenting the institute and its services, including:
+
+* Home
+* About
+* Courses
+* Course Details
+* Contact
+* Enquiry / Application functionality
+* Responsive navigation
+* Footer and supporting sections
+
+---
+
+# 🧪 Development
+
+During development, the frontend and backend can be run independently.
+
+### Frontend
+
+```bash
+cd client
+npm run dev
+```
+
+### Backend
+
+```bash
+cd server
+node server.js
+```
+
+This setup allows frontend and backend development to happen simultaneously.
+
+---
+
+# 🤝 Contributing
 
 Contributions, improvements, and suggestions are welcome.
 
-1. Fork the repository
-2. Create a new branch
+### 1. Fork the repository
+
+### 2. Create a feature branch
 
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
-3. Make your changes
-4. Commit your changes
+### 3. Make your changes
+
+### 4. Commit your changes
 
 ```bash
+git add .
 git commit -m "Add your feature"
 ```
 
-5. Push to your branch
+### 5. Push the branch
 
 ```bash
 git push origin feature/your-feature-name
 ```
 
-6. Open a Pull Request
+### 6. Open a Pull Request
 
 ---
 
-## 📄 License
+# 👨‍💻 Developer
 
-This project is developed for **Hanumadakshita Evolving Skills Pvt. Ltd.**
+### Vijay
+
+GitHub:
+https://github.com/comradevijay
+
+---
+
+# 📄 License
+
+This project was developed for **Hanumadakshita Evolving Skills Pvt. Ltd.**
 
 All rights reserved.
 
 ---
 
-## 👨‍💻 Developer
+# ⭐ Support
 
-**Vijay**
-GitHub: https://github.com/comradevijay
+If you find this project useful or interesting, consider giving the repository a ⭐ on GitHub.
 
----
+**Live Website:**
+https://hanumadakshita.onrender.com/
 
-### ⭐ Support
-
-If you find this project useful, consider giving the repository a star ⭐
+**Source Code:**
+https://github.com/comradevijay/Hanumadakshita
