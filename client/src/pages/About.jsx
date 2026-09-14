@@ -1,5 +1,3 @@
-import heroImg from "../assets/about-hero.jpg"; // swap for your actual office/learning photo
-
 export default function About() {
   return (
     
