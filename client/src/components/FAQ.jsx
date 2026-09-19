@@ -138,17 +138,36 @@ export default function FAQ() {
             {faqs.map((item, i) => {
               const isOpen = open === i;
               return (
-                <div className={`faq-item ${isOpen ? "is-open" : ""}`} data-reveal-item key={item.q}>
+                // className is constant so React never wipes "reveal-visible"
+                <div
+                  className="faq-item"
+                  data-open={isOpen}
+                  data-reveal-item
+                  key={item.q}
+                >
                   <button
+                    type="button"
+                    id={`faq-q-${i}`}
                     className="faq-item-head"
                     onClick={() => setOpen(isOpen ? -1 : i)}
                     aria-expanded={isOpen}
+                    aria-controls={`faq-a-${i}`}
                   >
                     <span className="faq-q-mark">Q</span>
                     <span className="faq-question">{item.q}</span>
-                    <span className="faq-chevron" aria-hidden="true">{isOpen ? "▲" : "▼"}</span>
+                    <span className="faq-chevron" aria-hidden="true">▼</span>
                   </button>
-                  {isOpen && <p className="faq-answer">{item.a}</p>}
+
+                  <div
+                    id={`faq-a-${i}`}
+                    className="faq-answer-wrap"
+                    role="region"
+                    aria-labelledby={`faq-q-${i}`}
+                  >
+                    <div className="faq-answer-inner">
+                      <p className="faq-answer">{item.a}</p>
+                    </div>
+                  </div>
                 </div>
               );
             })}

@@ -537,88 +537,248 @@ html[data-liquid-glass="true"] .nav-indicator {
   color: var(--blue-deep);
 }
 
+/* ---------- Courses dropdown ---------- */
+
+/* Outer wrapper: positioning + hover bridge only (no opacity here,
+   so the inner panel's backdrop-filter works while it animates) */
 .navbar-dropdown-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
   left: 50%;
-  margin-left: -105px;
-  min-width: 210px;
+  margin-left: -140px;
+  width: 280px;
+  padding-top: 10px;              /* invisible bridge so hover isn't lost */
   z-index: 10;
-  animation: navDropdownIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid transparent;
+
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 0.18s;
 }
 
+.navbar-dropdown-menu[data-open="true"] {
+  visibility: visible;
+  pointer-events: auto;
+  transition: visibility 0s;
+}
+
+/* Inner panel: the glass surface + open/close animation */
 .navbar-dropdown-menu-inner {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(244, 247, 255, 0.24) 50%,
-    rgba(219, 230, 255, 0.26) 100%
-  );
-  backdrop-filter: blur(26px) saturate(190%) contrast(1.05);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.94);
+  transform-origin: top center;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(10px) saturate(170%);
+  backdrop-filter: blur(10px) saturate(170%);
+  border: 1px solid rgba(10, 26, 58, 0.07);
+  border-radius: 18px;
   box-shadow:
-    0 24px 48px -16px rgba(10, 26, 58, 0.32),
-    inset 0 1px 1px rgba(255, 255, 255, 0.9),
-    inset 0 -10px 18px -14px rgba(47, 94, 255, 0.24);
-  padding: 6px;
+    0 24px 48px -16px rgba(10, 26, 58, 0.22),
+    0 2px 6px rgba(10, 26, 58, 0.05);
+  padding: 22px 24px 14px;
   display: flex;
   flex-direction: column;
-  gap: 0;
-  overflow: hidden;
 }
 
-html[data-liquid-glass="true"] .navbar-dropdown-menu-inner {
-  backdrop-filter: url(#liquid-glass-distortion) blur(18px) saturate(150%);
-}
-
-@keyframes navDropdownIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.navbar-dropdown-menu a {
-  position: relative;
-  padding: 13px 16px;
-  border-radius: 12px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--charcoal);
-  border: 1px solid transparent;
-  border-bottom: 1px solid rgba(10, 26, 58, 0.08);
-  overflow: hidden;
+.navbar-dropdown-menu[data-open="true"] .navbar-dropdown-menu-inner {
+  opacity: 1;
+  transform: none;
   transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
+    opacity 0.22s ease-out,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.navbar-dropdown-menu a:last-of-type {
-  border-bottom: none !important;
+/* Chromium-only liquid glass enhancement (set by the navbar JS) */
+:root[data-liquid-glass="true"] .navbar-dropdown-menu-inner {
+  -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(6px) saturate(170%);
+  backdrop-filter: url(#liquid-glass-distortion) blur(6px) saturate(170%);
 }
 
-.navbar-dropdown-menu a:hover {
-  color: var(--blue-deep);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(18px) saturate(115%) contrast(1.03);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-}
-
-.navbar-dropdown-all {
-  margin-top: 4px;
-  border-top: 1px solid rgba(10, 26, 58, 0.1) !important;
-  padding-top: 13px !important;
-  color: var(--blue) !important;
+/* "COURSES" label */
+.dd-label {
+  font-size: 0.7rem;
   font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
 }
+
+/* rows */
+.navbar-dropdown-menu .dd-item {
+  position: relative;
+  isolation: isolate;             /* keeps the glass layers behind the text */
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  color: var(--ink);
+  transition: transform 0.2s ease;
+}
+
+/* neutralise any generic navbar link hover styles */
+.navbar-dropdown-menu .dd-item:hover {
+  color: var(--blue-deep);
+  background: none;
+  border: none;
+  backdrop-filter: none;
+  transform: none;
+}
+
+/* liquid-glass highlight */
+.navbar-dropdown-menu .dd-item::before {
+  content: "";
+  position: absolute;
+  inset: 1px -14px;               /* bleeds past the text for breathing room */
+  z-index: -1;
+  border-radius: 18px;
+  background:
+    /* specular hotspot, top-left */
+    radial-gradient(120% 90% at 12% 0%, rgba(255, 255, 255, 0.42), transparent 55%),
+    /* refracted blue tint, bottom-right */
+    radial-gradient(90% 80% at 100% 100%, rgba(37, 99, 235, 0.14), transparent 60%),
+    /* clear base */
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    inset 1.5px 1.5px 1px -0.5px rgba(255, 255, 255, 0.9),    /* bright rim, top-left */
+    inset -1.5px -1.5px 1px -0.5px rgba(255, 255, 255, 0.4),  /* softer rim, bottom-right */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),                /* thin glass edge */
+    inset 0 0 14px rgba(255, 255, 255, 0.2),                  /* inner glow */
+    inset 0 -8px 16px -10px rgba(37, 99, 235, 0.25),          /* depth at the bottom */
+    0 10px 22px -12px rgba(10, 26, 58, 0.3);                  /* soft drop shadow */
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 0.2s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navbar-dropdown-menu .dd-item:hover::before,
+.navbar-dropdown-menu .dd-item:focus-visible::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* light sweep that glides across the glass on hover */
+.navbar-dropdown-menu .dd-item::after {
+  content: "";
+  position: absolute;
+  inset: 1px -14px;
+  z-index: -1;
+  border-radius: 18px;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  background-position: 130% 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-dropdown-menu .dd-item:hover::after,
+.navbar-dropdown-menu .dd-item:focus-visible::after {
+  opacity: 1;
+  background-position: -30% 0;
+  transition:
+    opacity 0.2s ease,
+    background-position 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dd-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--blue);
+  padding-top: 5px;
+  flex-shrink: 0;
+}
+
+.dd-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: transform 0.2s ease;
+}
+
+.navbar-dropdown-menu .dd-item:hover .dd-text {
+  transform: translateX(2px);
+}
+
+.dd-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.navbar-dropdown-menu .dd-item:hover .dd-title,
+.navbar-dropdown-menu .dd-item:focus-visible .dd-title {
+  color: var(--blue);
+}
+
+.dd-desc {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* label + rows fade up a beat after the panel */
+.dd-label,
+.navbar-dropdown-menu .dd-item {
+  opacity: 0;
+  translate: 0 6px;
+  transition:
+    opacity 0.15s ease,
+    translate 0.15s ease,
+    transform 0.2s ease;
+}
+
+.navbar-dropdown-menu[data-open="true"] .dd-label,
+.navbar-dropdown-menu[data-open="true"] .dd-item {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.navbar-dropdown-menu[data-open="true"] .dd-label {
+  transition-delay: 0.06s;
+}
+
+.navbar-dropdown-menu[data-open="true"] .dd-item {
+  transition-delay: calc(0.1s + var(--i, 0) * 0.05s);
+}
+
+/* chevron flips while open */
+.navbar-chevron {
+  transition: transform 0.25s ease;
+}
+.navbar-dropdown-trigger[aria-expanded="true"] .navbar-chevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-dropdown-menu,
+  .navbar-dropdown-menu-inner,
+  .dd-label,
+  .navbar-dropdown-menu .dd-item,
+  .navbar-dropdown-menu .dd-item::before,
+  .navbar-dropdown-menu .dd-item::after,
+  .dd-text,
+  .navbar-chevron {
+    transition: none;
+  }
+}
+
+/* ---------- end dropdown ---------- */
 
 .navbar-cta {
   flex-shrink: 0;
@@ -2207,16 +2367,46 @@ html[data-liquid-glass="true"] .navbar-toggle::before {
   color: var(--ink);
   font-size: 0.96rem;
 }
+
 .faq-chevron {
   color: var(--blue);
   font-size: 0.7rem;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.faq-item[data-open="true"] .faq-chevron {
+  transform: rotate(180deg);
 }
 
+/* smooth expand/collapse */
+.faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.faq-item[data-open="true"] .faq-answer-wrap {
+  grid-template-rows: 1fr;
+}
+.faq-answer-inner {
+  overflow: hidden;
+  min-height: 0;
+  visibility: hidden;
+  transition: visibility 0.35s;
+}
+.faq-item[data-open="true"] .faq-answer-inner {
+  visibility: visible;
+}
+
+/* neutralise the global h1–p text-reveal rules for the answer text */
 .faq-answer {
   padding: 0 20px 20px 64px;
   color: var(--muted);
   font-size: 0.9rem;
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+  animation: none;
+  transition: none;
 }
 
 .faq-footer-note {

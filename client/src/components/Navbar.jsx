@@ -2,11 +2,12 @@ import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react
 import { NavLink, Link, useLocation } from "react-router-dom";
 import "../styles/styles.css";
 
+// desc lines are placeholders, edit them to your real course taglines
 const courseLinks = [
-  { slug: "python-full-stack", title: "Python Full Stack" },
-  { slug: "java-full-stack", title: "Java Full Stack" },
-  { slug: "web-development", title: "Web Development" },
-  { slug: "sql-mongodb", title: "SQL & MongoDB" },
+  { slug: "python-full-stack", title: "Python Full Stack", desc: "Web development with AI" },
+  { slug: "java-full-stack", title: "Java Full Stack", desc: "Web development with AI" },
+  { slug: "web-development", title: "Web Development", desc: "HTML, CSS, JS & React" },
+  { slug: "sql-mongodb", title: "SQL & MongoDB", desc: "Databases from scratch" },
 ];
 
 /**
@@ -168,6 +169,9 @@ export default function Navbar() {
     };
   }, []);
 
+  // clear any pending close timer on unmount
+  useEffect(() => () => clearTimeout(closeTimer.current), []);
+
   const openDropdown = () => {
     clearTimeout(closeTimer.current);
     setCoursesOpen(true);
@@ -241,23 +245,51 @@ export default function Navbar() {
                 onClick={() => setCoursesOpen((o) => !o)}
                 onMouseEnter={(e) => moveIndicatorTo(e.currentTarget)}
                 aria-expanded={coursesOpen}
+                aria-haspopup="true"
               >
                 Courses
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  className="navbar-chevron"
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </button>
-              {coursesOpen && (
-                <div className="navbar-dropdown-menu">
-                  <div className="navbar-dropdown-menu-inner">
-                    {courseLinks.map((c) => (
-                      <Link key={c.slug} to={`/${c.slug}`} onClick={() => { setOpen(false); setCoursesOpen(false); }}>
-                        {c.title}
-                      </Link>
-                    ))}
-                  </div>
+
+              {/* Always rendered so the open/close transition can play */}
+              <div
+                className="navbar-dropdown-menu"
+                data-open={coursesOpen}
+                aria-hidden={!coursesOpen}
+              >
+                <div className="navbar-dropdown-menu-inner">
+                  <span className="dd-label">Courses</span>
+                  {courseLinks.map((c, i) => (
+                    <Link
+                      key={c.slug}
+                      to={`/${c.slug}`}
+                      className="dd-item"
+                      style={{ "--i": i }}
+                      tabIndex={coursesOpen ? 0 : -1}
+                      onClick={() => {
+                        setOpen(false);
+                        setCoursesOpen(false);
+                      }}
+                    >
+                      <span className="dd-num">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="dd-text">
+                        <span className="dd-title">{c.title}</span>
+                        <span className="dd-desc">{c.desc}</span>
+                      </span>
+                    </Link>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
 
             <NavLink
