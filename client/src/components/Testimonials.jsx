@@ -121,60 +121,136 @@ const testimonials = [
   },
 ];
 
+
+const SPEED = 45; // px per second, lower = slower
+const DOT_COUNT = 5;
+
 export default function Testimonials() {
   const [active, setActive] = useState(0);
-  const trackRef = useRef(null);
+  const [reduced] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  const scrollRef = useRef(null);
   const cardRefs = useRef([]);
+  const hoverRef = useRef(false);
+  const pauseUntil = useRef(0);
 
-  const DOT_COUNT = 5;
-  const cardsPerDot = Math.ceil(testimonials.length / DOT_COUNT);
+  const total = testimonials.length;
+  const cardsPerDot = Math.ceil(total / DOT_COUNT);
 
-  const scrollToCard = (i) => {
-    const card = cardRefs.current[i];
-    const track = trackRef.current;
-    if (!card || !track) return;
-    const trackRect = track.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const offset = cardRect.left - trackRect.left + track.scrollLeft;
-    track.scrollTo({ left: offset, behavior: "smooth" });
+  // two copies so the loop is seamless (skipped for reduced motion)
+  const loop = reduced ? testimonials : [...testimonials, ...testimonials];
+
+  const pauseFor = (ms) => {
+    pauseUntil.current = performance.now() + ms;
   };
 
-  const scrollToDot = (dotIndex) => {
-    scrollToCard(dotIndex * cardsPerDot);
-  };
-
+  // ---- continuous auto-scroll to the left ----
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+    const el = scrollRef.current;
+    if (!el || reduced) return;
+
+    let half = 0; // width of one full set of cards
+    const measure = () => {
+      const a = cardRefs.current[0];
+      const b = cardRefs.current[total];
+      if (a && b) half = b.offsetLeft - a.offsetLeft;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+
+    let raf;
+    let last = performance.now();
+    let pos = el.scrollLeft;
+
+    const tick = (now) => {
+      const dt = Math.min(now - last, 50); // avoid a jump after tab switch
+      last = now;
+
+      if (hoverRef.current || now < pauseUntil.current) {
+        pos = el.scrollLeft; // stay in sync with manual scrolling
+      } else {
+        pos += (SPEED * dt) / 1000;
+        if (half && pos >= half) pos -= half; // jump back invisibly
+        el.scrollLeft = pos;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", measure);
+    };
+  }, [reduced, total]);
+
+  // ---- keep the active dot in sync with the scroll position ----
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
     let ticking = false;
+    const update = () => {
+      const r = el.getBoundingClientRect();
+      const center = r.left + r.width / 2;
+      let closest = 0;
+      let best = Infinity;
+      cardRefs.current.forEach((card, i) => {
+        if (!card) return;
+        const c = card.getBoundingClientRect();
+        const d = Math.abs(c.left + c.width / 2 - center);
+        if (d < best) {
+          best = d;
+          closest = i;
+        }
+      });
+      // % total maps the cloned cards back onto the originals
+      setActive(
+        Math.min(DOT_COUNT - 1, Math.floor((closest % total) / cardsPerDot))
+      );
+      ticking = false;
+    };
+
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => {
-        const trackRect = track.getBoundingClientRect();
-        const trackCenter = trackRect.left + trackRect.width / 2;
-        let closest = 0;
-        let closestDist = Infinity;
-        cardRefs.current.forEach((card, i) => {
-          if (!card) return;
-          const cardRect = card.getBoundingClientRect();
-          const cardCenter = cardRect.left + cardRect.width / 2;
-          const dist = Math.abs(cardCenter - trackCenter);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closest = i;
-          }
-        });
-        setActive(Math.min(DOT_COUNT - 1, Math.floor(closest / cardsPerDot)));
-        ticking = false;
-      });
+      requestAnimationFrame(update);
     };
 
-    track.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => track.removeEventListener("scroll", onScroll);
-  }, [cardsPerDot]);
+    el.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [cardsPerDot, total]);
+
+  // ---- clicking a dot: jump to the nearest copy of that card ----
+  const scrollToDot = (dotIndex) => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const first = dotIndex * cardsPerDot;
+    const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+    const elLeft = el.getBoundingClientRect().left;
+
+    const offsetOf = (i) => {
+      const c = cardRefs.current[i];
+      return c
+        ? c.getBoundingClientRect().left - elLeft + el.scrollLeft - pad
+        : null;
+    };
+
+    const candidates = [offsetOf(first), offsetOf(first + total)].filter(
+      (v) => v !== null
+    );
+    const target = candidates.reduce((a, b) =>
+      Math.abs(b - el.scrollLeft) < Math.abs(a - el.scrollLeft) ? b : a
+    );
+
+    pauseFor(3000); // let the smooth scroll finish, then resume drifting
+    el.scrollTo({ left: target, behavior: "smooth" });
+  };
 
   return (
     <section className="testimonials" id="testimonials">
@@ -190,13 +266,22 @@ export default function Testimonials() {
           </p>
         </div>
 
-        <div className="testimonials-scroll" ref={trackRef}>
+        <div
+          className="testimonials-scroll"
+          ref={scrollRef}
+          onMouseEnter={() => (hoverRef.current = true)}
+          onMouseLeave={() => (hoverRef.current = false)}
+          onTouchStart={() => pauseFor(4000)}
+          onTouchEnd={() => pauseFor(2500)}
+          onWheel={() => pauseFor(1500)}
+        >
           <div className="testimonials-track">
-            {testimonials.map((t, i) => (
+            {loop.map((t, i) => (
               <div
                 className="testimonial-card"
-                key={t.name}
+                key={`${t.name}-${i}`}
                 ref={(el) => (cardRefs.current[i] = el)}
+                aria-hidden={i >= total ? "true" : undefined}
               >
                 <div className="testimonial-top">
                   <span className="testimonial-quote-mark" aria-hidden="true">

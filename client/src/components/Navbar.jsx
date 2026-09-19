@@ -4,10 +4,10 @@ import "../styles/styles.css";
 
 // desc lines are placeholders, edit them to your real course taglines
 const courseLinks = [
-  { slug: "python-full-stack", title: "Python Full Stack", desc: "Web development with AI" },
-  { slug: "java-full-stack", title: "Java Full Stack", desc: "Web development with AI" },
-  { slug: "web-development", title: "Web Development", desc: "HTML, CSS, JS & React" },
-  { slug: "sql-mongodb", title: "SQL & MongoDB", desc: "Databases from scratch" },
+  { slug: "python-full-stack", title: "Python Full Stack", desc: "Django, React & AI tools" },
+  { slug: "java-full-stack",   title: "Java Full Stack",   desc: "Spring Boot, React & APIs" },
+  { slug: "web-development",   title: "Web Development",   desc: "HTML, CSS, JS & React" },
+  { slug: "sql-mongodb",       title: "SQL & MongoDB",     desc: "Databases from scratch" },
 ];
 
 /**
