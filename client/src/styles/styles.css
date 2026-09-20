@@ -777,18 +777,7 @@ html[data-liquid-glass="true"] .nav-indicator {
   transform: rotate(180deg);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .navbar-dropdown-menu,
-  .navbar-dropdown-menu-inner,
-  .dd-label,
-  .navbar-dropdown-menu .dd-item,
-  .navbar-dropdown-menu .dd-item::before,
-  .navbar-dropdown-menu .dd-item::after,
-  .dd-text,
-  .navbar-chevron {
-    transition: none;
-  }
-}
+
 
 /* ---------- end dropdown ---------- */
 

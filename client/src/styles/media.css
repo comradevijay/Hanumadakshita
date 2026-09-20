@@ -155,9 +155,45 @@
   html[data-liquid-glass="true"] .navbar-dropdown-trigger:active {
     backdrop-filter: url(#liquid-glass-distortion) blur(12px) saturate(115%)
       brightness(1.03);
-    -webkit-backdrop-filter: url(#liquid-glass-distortion) blur(12px)
-      saturate(115%) brightness(1.03);
   }
+
+  /* open = simple inline list, full width */
+  .navbar-dropdown-menu[data-open="true"] .navbar-dropdown-menu-inner {
+    opacity: 1;
+    transform: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
+    padding: 4px 0 8px;
+  }
+  .navbar-links .navbar-dropdown-menu a.dd-item {
+    padding: 10px 0;
+    border-bottom: 0;
+    width: 100%;
+  }
+  .dd-label,
+  .navbar-dropdown-menu .dd-item {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  /* Courses row lines up with the other rows */
+  .navbar-dropdown-trigger {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* panel sizes to its content */
+  .navbar-links {
+    align-items: stretch;
+    max-height: calc(100dvh - 7rem);
+    overflow-y: auto;
+  }
+
+
 }
 
 @media (max-width: 960px) {
@@ -451,5 +487,14 @@
 @media (max-width: 560px) {
   .curriculum-card {
     padding: 24px 20px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .navbar-links .navbar-dropdown .navbar-dropdown-menu:not([data-open="true"]) {
+    display: none !important;
+  }
+  .navbar-links .navbar-dropdown .navbar-dropdown-menu {
+    padding-top: 0;
   }
 }

@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import "../styles/styles.css";
+import "../styles/media.css";
 
 // desc lines are placeholders, edit them to your real course taglines
 const courseLinks = [
