@@ -167,7 +167,7 @@ export default function Courses() {
           </div>
         )}
 
-        {status === "loading" && <p style={{ marginTop: "40px", textAlign: "center" }}>Loading courses…</p>}
+        {status === "loading" && <PageLoader label="Loading course" />}
         {status === "error" && (
           <p style={{ marginTop: "40px", textAlign: "center" }}>
             Couldn't load courses — check that the backend server is running.

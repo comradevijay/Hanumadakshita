@@ -5,6 +5,7 @@ import CourseRoadmap from "../components/CourseRoadmap";
 import CourseCurriculum from "../components/CourseCurriculum";
 import NotFound from "./NotFound";
 import { api } from "../api/client";
+import CourseDetailSkeleton from "../components/CourseDetailSkeleton";
 
 // Swap in whatever icon set the rest of the site already uses — this
 // is a small local lookup so the API can send plain strings
@@ -63,11 +64,7 @@ export default function CourseDetail() {
   }, [slug]);
 
   if (status === "loading") {
-    return (
-      <div className="course-detail-status">
-        <p>Loading course…</p>
-      </div>
-    );
+    return <CourseDetailSkeleton />;
   }
 
   if (status === "not-found") {
@@ -123,8 +120,12 @@ export default function CourseDetail() {
           </div>
 
           <aside className="course-detail-side" data-reveal>
-            <span className={`course-detail-seats ${seatsLeft <= 3 ? "low" : ""}`}>
-              {isFull ? "Batch full" : `${seatsLeft} seat${seatsLeft === 1 ? "" : "s"} left`}
+            <span
+              className={`course-detail-seats ${seatsLeft <= 3 ? "low" : ""}`}
+            >
+              {isFull
+                ? "Batch full"
+                : `${seatsLeft} seat${seatsLeft === 1 ? "" : "s"} left`}
             </span>
 
             <Link
