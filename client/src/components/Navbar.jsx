@@ -115,7 +115,7 @@ function LiquidGlassFilter() {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [coursesOpen, setCoursesOpen] = useState(false);
-  const closeTimer = useRef(null);
+  const dropdownRef = useRef(null);
   const location = useLocation();
 
   const navRef = useRef(null);
@@ -170,24 +170,41 @@ export default function Navbar() {
     };
   }, []);
 
-  // clear any pending close timer on unmount
-  useEffect(() => () => clearTimeout(closeTimer.current), []);
+  // Courses dropdown opens on click only. While it is open, close it on an
+  // outside press or the Escape key.
+  useEffect(() => {
+    if (!coursesOpen) return;
 
-  const openDropdown = () => {
-    clearTimeout(closeTimer.current);
-    setCoursesOpen(true);
-  };
+    const onPointerDown = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setCoursesOpen(false);
+      }
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setCoursesOpen(false);
+    };
 
-  const closeDropdownDelayed = () => {
-    closeTimer.current = setTimeout(() => setCoursesOpen(false), 150);
-  };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [coursesOpen]);
 
   return (
     <>
       <LiquidGlassFilter />
       <header className="navbar">
         <div className="container navbar-inner">
-          <NavLink to="/" className="navbar-brand" onClick={() => setOpen(false)}>
+          <NavLink
+            to="/"
+            className="navbar-brand"
+            onClick={() => {
+              setOpen(false);
+              setCoursesOpen(false);
+            }}
+          >
             <span className="navbar-mark" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
                 <path d="M12 3 2 8l10 5 8-4.2V15h1.5V8L12 3Z" fill="currentColor" />
@@ -235,11 +252,7 @@ export default function Navbar() {
               About Us
             </NavLink>
 
-            <div
-              className="navbar-dropdown"
-              onMouseEnter={openDropdown}
-              onMouseLeave={closeDropdownDelayed}
-            >
+            <div className="navbar-dropdown" ref={dropdownRef}>
               <button
                 ref={setLinkRef("courses")}
                 className={`navbar-dropdown-trigger ${coursesOpen ? "active" : ""}`}
@@ -323,7 +336,10 @@ export default function Navbar() {
             className="navbar-toggle"
             aria-label="Toggle menu"
             aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => {
+              setOpen((o) => !o);
+              setCoursesOpen(false);
+            }}
           >
             <span />
             <span />
